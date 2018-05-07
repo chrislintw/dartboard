@@ -1,0 +1,43 @@
+<html>
+<head>
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+  
+  <svg width="100%" height="100%" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  </svg>
+  <script>
+    $(function(){ 
+      
+      var startAngle = 9;
+      var cx = 400;
+      var cy = 400;
+      var r = 390;
+      var x0 = cx+r*Math.cos(startAngle*Math.PI/180);
+      var y0 = cy-r*Math.sin(startAngle*Math.PI/180);
+      var svg =  $('svg');
+      for( i = 1 ; i <= 20; i++){
+        path = $('<path>')
+        var deg = 18 * i + startAngle;
+        var x1 = cx+r*Math.cos(deg*Math.PI/180); 
+        var y1 = cy-r*Math.sin(deg*Math.PI/180); 
+        path.attr('style', "fill:#999; stroke:#000; stroke-width:1;")
+        path.attr("d","M "+cx+","+cy+" L "+x0+","+y0+" A "+r+","+r+" 0 0,0 "+x1+","+y1+" Z");
+        
+        $('svg').append(path);
+        // console.log("i: "+i+" deg: "+ deg + " x0: "+ x0 + " y0: "+ y0)
+        console.log("i: "+i+" deg: "+ deg + " x1: "+ x1 + " y1: "+ y1)
+        x0 = x1
+        y0 = y1
+        
+      }
+      $('svg').html(svg.html())
+      
+    }
+    );
+  </script>
+</body>
+</html>
