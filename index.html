@@ -6,34 +6,76 @@
   crossorigin="anonymous"></script>
 </head>
 <body>
-  
-  <svg width="100%" height="100%" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    #point {
+      font-size: 48px;
+    }
+  </style>
+  <svg width="600px" height="600px" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <!-- "M "+cx+","+cy+" L "+x0+","+y0+" A "+r+","+r+" 0 0,0 "+x1+","+y1+" Z" -->
   </svg>
+  <div id="point">
+
+  </div>
   <script>
     $(function(){ 
-      
-      var startAngle = 9;
-      var cx = 400;
-      var cy = 400;
-      var r = 390;
-      var x0 = cx+r*Math.cos(startAngle*Math.PI/180);
-      var y0 = cy-r*Math.sin(startAngle*Math.PI/180);
-      var svg =  $('svg');
-      for( i = 1 ; i <= 20; i++){
-        path = $('<path>')
-        var deg = 18 * i + startAngle;
-        var x1 = cx+r*Math.cos(deg*Math.PI/180); 
-        var y1 = cy-r*Math.sin(deg*Math.PI/180); 
-        path.attr('style', "fill:#999; stroke:#000; stroke-width:1;")
-        path.attr("d","M "+cx+","+cy+" L "+x0+","+y0+" A "+r+","+r+" 0 0,0 "+x1+","+y1+" Z");
-        
-        $('svg').append(path);
-        // console.log("i: "+i+" deg: "+ deg + " x0: "+ x0 + " y0: "+ y0)
-        console.log("i: "+i+" deg: "+ deg + " x1: "+ x1 + " y1: "+ y1)
-        x0 = x1
-        y0 = y1
-        
+      // functions
+      var getX = function(x, radius, angle){
+        return x + radius * Math.cos(angle * Math.PI / 180)
       }
+      var getY = function(y, radius, angle){
+        return y - radius * Math.sin(angle * Math.PI / 180)
+      }
+      var svg =  $('svg');
+      var startAngle = 9;
+      var radii = [20, 130, 150, 220, 240]
+      var points = [13,4,18,1,20,5,12,9,14,11,8,16,7,19,3,17,2,15,10,6]
+      var centre = { x: 270, y: 270 }
+      var getPoints = function(angle){
+        return $.map(radii, function(radius) {
+          return {
+            x: getX(centre.x, radius, angle),
+            y: getY(centre.y, radius, angle)
+          }
+        })
+      }
+      var lastPoints = getPoints(startAngle)
+      $.each(points,function(i, p){
+        var deg = 18 * (i+1) + startAngle;
+        var newPoints = getPoints(deg);
+        // == Draw
+        text = $('<text>')
+        text.html(p)
+        text.attr('x', getX(centre.x, 260, deg- 9)) 
+        text.attr('y', getY(centre.x, 258, deg- 9))
+        svg.append(text)
+        
+        for(j= 0; j < 4;j++){
+          var colour = i % 2 == 0 ? "#222" : "#EEE"
+          var path = $('<path>')
+          var rate = 1
+          if (j === 1) {
+            rate = 3
+            colour = i % 2 == 0 ? "#F22" : "#2F2"
+          } 
+          if (j === 3) {
+            rate = 2
+            colour = i % 2 == 0 ? "#F22" : "#2F2"
+          }
+          path.attr('data-point', p * rate)
+          path.attr('style', "fill:"+ colour+"; stroke:#C0C0C0; stroke-width:1;")
+          path.attr('d',"M "+lastPoints[j].x+","+lastPoints[j].y+" A "+radii[j]+","+radii[j]+" 0 0,0 "+newPoints[j].x+","+newPoints[j].y+" L "+newPoints[j+1].x+","+newPoints[j+1].y+" A "+radii[j+1]+","+radii[j+1]+" 0 0,1 "+lastPoints[j+1].x+","+lastPoints[j+1].y +" Z")
+          svg.append(path)
+
+        }
+        // ==
+        lastPoints = newPoints
+      })
+      // events
+      $('svg').on('click', 'path',function(){
+        $('#point').html($(this).data('point'))
+      })
+      // render
       $('svg').html(svg.html())
       
     }
