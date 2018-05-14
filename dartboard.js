@@ -49,14 +49,14 @@ $(function(){
     lastPoints = newPoints
   })
   var bulls_eye = $('<circle>').attr({
-    class: 'bulls_eye',
+    class: 'red',
     cx: centre.x,
     cy: centre.y,
     r: 9,
     "data-point": 50
   })
   var outer_bull = $('<circle>').attr({
-    class: 'outer_bull',
+    class: 'green',
     cx: centre.x,
     cy: centre.y,
     r: 20,

@@ -5,23 +5,42 @@
 path, circle {
   stroke:#C0C0C0; 
   stroke-width: 2;
+  cursor: pointer;
 }
 
 .black {
   fill: #222;
 }
+.black:hover{
+  fill: #444;
+}
+.black:active{
+  fill: #000;
+}
 .white {
   fill: #EEE;
 }
+.white:hover{
+  fill: #fff;
+}
+.white:active{
+  fill: #DDD;
+}
 .red{
-  fill: #F22;
+  fill: rgb(241, 31, 31)
+}
+.red:hover{
+  fill: rgb(226, 107, 107);
+}
+.red:active{
+  fill: rgb(209, 8, 8);
 }
 .green{
   fill: #0f9606;
 }
-.bulls_eye{
-  fill: #F22;
+.green:hover{
+  fill: #0FA717;
 }
-.outer_bull{
-  fill: #0f9606;
+.green:active{
+  fill: rgb(9, 129, 15);
 }
