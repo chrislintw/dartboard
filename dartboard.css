@@ -1,3 +1,27 @@
 #point {
   font-size: 48px;
 }
+
+path, circle {
+  stroke:#C0C0C0; 
+  stroke-width: 2;
+}
+
+.black {
+  fill: #222;
+}
+.white {
+  fill: #EEE;
+}
+.red{
+  fill: #F22;
+}
+.green{
+  fill: #0f9606;
+}
+.bulls_eye{
+  fill: #F22;
+}
+.outer_bull{
+  fill: #0f9606;
+}
