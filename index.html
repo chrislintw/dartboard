@@ -1,16 +1,77 @@
 <html>
+
 <head>
-  <script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="layout.css">
   <link rel="stylesheet" href="dartboard.css">
 </head>
-<body>
 
-  <svg width="600px" height="600px" version="1.1" xmlns="http://www.w3.org/2000/svg">
-  </svg>
-  <div id="point"></div>
+<body>
+  <div class="dartContainer">
+    <header class="logo">DartBoard</header>
+    <div class="selectMode">
+      <p>Select Mode</p>
+      <label class="container">101
+        <input type="radio" checked="checked" name="radio">
+        <span class="checkmark"></span>
+      </label>
+      <label class="container">301
+        <input type="radio" name="radio">
+        <span class="checkmark"></span>
+      </label>
+      <label class="container">501
+        <input type="radio" name="radio">
+        <span class="checkmark"></span>
+      </label>
+    </div>
+    <div class="layout">
+      <div class="firstRow">
+        <div class="dart">
+          <svg width="600px" height="550px" version="1.1" xmlns="http://www.w3.org/2000/svg"></svg>
+        </div>
+        <div id="point">
+          <div class="first">
+            <div class="triangle"></div>
+            <div class="score"></div>
+          </div>
+          <div class="second">
+            <div class="triangle"></div>
+            <div class="score"></div>
+          </div>
+          <div class="third">
+            <div class="triangle"></div>
+            <div class="score"></div>
+          </div>
+        </div>
+      </div>
+      <div class="secondRow players">
+        <div class="question">
+          <button class="add btn">Add players</button>
+
+        </div>
+        <div class="playerCards"></div>
+      </div>
+    </div>
+  </div>
+  <div class="modal">
+    <div class="modal-content">
+      <header class="modal-header">Enter players name</header>
+      <div class="modal-body">
+        <button class="addMorePlayers btn">Add more players</button>
+        <div class="enterNameInputs">
+          <input placeholder="Name" name="player">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="save btn">Save</button>
+        <button class="cancel btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+
   <script src="dartboard.js"></script>
+  <script src="players.js"></script>
 </body>
+
 </html>
